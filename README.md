@@ -11,7 +11,7 @@ cumtthesis class aims to provide a better way to format thesises of cumt
 
 # 效果
 
-![](捕获.jpg)
+![示例图片](./捕获.jpg)
 
 # 计划
 
