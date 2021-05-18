@@ -6,6 +6,7 @@
 *.log
 *.lot
 *.out
+*.spl
 *.toc
 *.toe
 *.gz
