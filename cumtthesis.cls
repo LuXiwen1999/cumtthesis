@@ -5,27 +5,28 @@
 %% The original source files were:
 %%
 %% cumtthesis.dtx  (with options: `cls')
-%%
+%% 
 %% This is a generated file.
-%%
+%% 
 %% Copyright (C) 2005-2015 by Xiao Lishun <xiaolishun@cumt.edn.cn>
-%%
+%% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.0
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in:
-%%
+%% 
 %% http://www.latex-project.org/lppl.txt
-%%
+%% 
 %% and version 1.0 or later is part of all distributions of LaTeX
 %% version 2004/10/01 or later.
-%%
+%% 
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
-%%
+%% 
 \NeedsTeXFormat{LaTeX2e}[2004/10/01]
 \ProvidesClass{cumtthesis}
 [2015/08/04 v2.0 China University of Mining and Technology Thesis Template]
+% check the preprint, final, blindreview, check
 \newif\ifcumt@preprint\cumt@preprinttrue
 \DeclareOption{preprint}{\cumt@preprinttrue\cumt@finalfalse}
 \newif\ifcumt@final\cumt@finalfalse
@@ -34,14 +35,17 @@
 \DeclareOption{blindreview}{\cumt@blindreviewtrue}
 \newif\ifcumt@check\cumt@checkfalse
 \DeclareOption{check}{\cumt@checktrue}
+% reference type: authoryear, numbers
 \newif\ifcumt@authoryear\cumt@authoryeartrue
 \DeclareOption{authoryear}{\global\cumt@authoryeartrue\cumt@numbersfalse}
 \newif\ifcumt@numbers\cumt@numbersfalse
 \DeclareOption{numbers}{\global\cumt@numberstrue\cumt@authoryearfalse}
+% the type of this thesis: Master Degree or PhD
 \newif\ifcumt@MD\cumt@MDtrue
 \DeclareOption{MD}{\cumt@MDtrue\cumt@PhDfalse}
 \newif\ifcumt@PhD\cumt@PhDfalse
 \DeclareOption{PhD}{\cumt@PhDtrue\cumt@MDfalse}
+% the no-chinese character using new times roman
 \DeclareOption{times}{\IfFileExists{txfonts.sty}%
   {\AtEndOfClass{\RequirePackage{txfonts}%
    \gdef\ttdefault{cmtt}%
@@ -53,7 +57,8 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ExecuteOptions{preprint,numbers,MD}
 \ProcessOptions\relax
-\LoadClass[UTF8,space=auto,autoindent=true,scheme=plain,zihao=-4]{ctexbook}%TODO:book
+%start the thesis
+\LoadClass[UTF8,space=auto,autoindent=true,scheme=plain]{ctexbook}%TODO:book
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}
 \RequirePackage{ifpdf}
@@ -70,8 +75,10 @@
 \fi
 \let\latexcontentsline\contentsline
 \DeclareGraphicsExtensions{.eps,.mps,.pdf,.jpg,.png,.gif}
+% if choice is preprint, all reference is blue
 \ifcumt@preprint
-  \xdef\cumt@refcolor{blue}
+  % \xdef\cumt@refcolor{blue}
+  \xdef\cumt@refcolor{black}
   \@openrightfalse\overfullrule5\p@
 \else
   \ifcumt@final
@@ -149,7 +156,12 @@
   \@mainmattertrue
   \pagenumbering{arabic}
   \pagestyle{cumt@headings}
-  \setlength{\baselineskip}{21\p@}
+  \zihao{-4}
+  %\setlength{\baselineskip}{20\p@}
+  \setlength{\baselineskip}{20pt}
+  %\setlength{\parskip}{0\baselineskip}
+  %set paragraph skip is 0pt
+  \setlength{\parskip}{0pt}
   \def\baselinestretch{1.4}
   \sloppy}
 \renewcommand\backmatter{%
@@ -210,25 +222,33 @@
     \def\cumt@biyexuexiao{\cumt@biyexuexiao@name}
 \newcommand{\cumt@first@titlepage}{
   \begin{figure}
-    \includegraphics[width=2.99cm]{cumt.pdf}\\
+    \includegraphics[scale=0.095]{style/cumt_logo.pdf}\\
   \end{figure}
   \begin{center}
     \vskip2\p@\bgroup\zihao{-2}\songti\cumt@xuewei\cumt@xueweilunwen@name\egroup\par\vskip2.5cm
     \parbox[t]{\cumt@clunwentimu@width\textwidth}{\zihao{2}\bf\boldmath\centering\cumt@clunwentimu}\par
     \bigskip\bigskip
-    \parbox[t]{\cumt@elunwentimu@width\textwidth}{\zihao{2}\centering\cumt@elunwentimu}\par
+    \parbox[t]{\cumt@elunwentimu@width\textwidth}{\bfseries\zihao{2}\centering\cumt@elunwentimu}\par
   \end{center}
   \vfill
   \begin{table}
     \centering
     \zihao{-3}
-    \begin{tabu}spread 0mm{X[c]X[c]X[l]}
+%    \begin{tabu}spread 0mm{X[c]X[c]X[l]}
+%    	作者 & a & \\
+%    	导师 & b & c
+%      \makebox[3em][s]{\cumt@zuozhe@name}: & \makebox[3em][s]{\cumt@zuozhe} & \\
+%      \makebox[3em][s]{\cumt@daoshi@name}: & \makebox[3em][s]{\cumt@daoshi}
+%                                           & \cumt@daoshizhicheng\\
+%%      \@ifundefined{cumt@dierdaoshi}{}{ & \makebox[3em][s]{\cumt@dierdaoshi}
+%%                                        & \cumt@dierdaoshizhicheng\\}
+%    \end{tabu}
+	\begin{tabular}{ l c r }
       \makebox[3em][s]{\cumt@zuozhe@name}: & \makebox[3em][s]{\cumt@zuozhe} & \\
       \makebox[3em][s]{\cumt@daoshi@name}: & \makebox[3em][s]{\cumt@daoshi}
                                            & \cumt@daoshizhicheng\\
-      \@ifundefined{cumt@dierdaoshi}{}{ & \makebox[3em][s]{\cumt@dierdaoshi}
-                                        & \cumt@dierdaoshizhicheng\\}
-    \end{tabu}
+	\end{tabular}
+
   \end{table}
   \vfill
   \begin{center}
@@ -236,6 +256,7 @@
     \cumtyear \cumt@biyeshijiannian@name\cumt@month \cumt@biyeshijianyue@name
   \end{center}
 }
+% make the cover
 \newcommand{\makecover}{
   \phantomsection
   \pdfbookmark[-1]{\cumt@clunwentimu}{clunwentimu}
@@ -245,10 +266,12 @@
   \begin{titlepage}
     \pagestyle{cumt@empty}
     \cumt@first@titlepage
-    \cumt@authorization
     \cumt@coverboxed
-    \cumt@authenticate
+%    \cumt@authorization
+%    \cumt@authenticate
+	 \cumt@declaration
   \end{titlepage}
+
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \pagestyle{cumt@plain}\pagenumbering{Roman}
 }
@@ -287,6 +310,8 @@
     \let\cumt@yanjiufangxiang\@empty
 \def\PingYueRen#1{\def\cumt@pingyueren{#1}}
     \let\cumt@pingyueren\@empty
+\setCJKfamilyfont{hwxk}{STXingkai}             %使用STXingkai华文行楷字体
+\newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
 \newcommand\cumt@coverboxed{
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \thisfancypage{}{%
@@ -295,62 +320,72 @@
   \setlength{\shadowsize}{\z@}%
   \shadowbox}{}
   \begingroup\centering\zihao{4}\hspace{-1em}
-    \begin{tabu}to.8\linewidth{X[-1,l]X[-1,r]}
-      \begin{tabu}spread 0mm{X[r]X[-1,c]}
-        \cumt@zhongtufenleihao@name: & \cumt@zhongtufenleihao\\
-        \tabucline{2-}
-        UDC: & \cumt@udc\rule{\z@}{.8cm}\\
-        \tabucline{2-}
-      \end{tabu}
-      &
-      \begin{tabu}spread0mm{X[r]X[-1,c]}
-        \cumt@xuexiaodaima@name: & \cumt@xuexiaodaima\\
-        \tabucline{2-}
-        \makebox[4em][s]{\cumt@miji@name:} & \makebox[2.5em][s]{\cumt@miji}\rule{\z@}{.8cm}\\
-        \tabucline{2-}
-      \end{tabu}\\
-    \end{tabu}
+%    \begin{tabu}to.8\linewidth{X[-1,l]X[-1,r]}
+%      \begin{tabu}spread 0mm{X[r]X[-1,c]}
+%        \cumt@zhongtufenleihao@name: & \cumt@zhongtufenleihao\\
+%        \tabucline{2-}
+%        UDC: & \cumt@udc\rule{\z@}{.8cm}\\
+%        \tabucline{2-}
+%      \end{tabu}
+%      &
+%      \begin{tabu}spread0mm{X[r]X[-1,c]}
+%        \cumt@xuexiaodaima@name: & \cumt@xuexiaodaima\\
+%        \tabucline{2-}
+%        \makebox[4em][s]{\cumt@miji@name:} & \makebox[2.5em][s]{\cumt@miji}\rule{\z@}{.8cm}\\
+%        \tabucline{2-}
+%      \end{tabu}\\
+%    \end{tabu}
   \par\vskip1cm
-  \begin{figure}
-    \centering
-    \includegraphics[width=5.8cm]{cumtxingkai.pdf}\\
-  \end{figure}
-  \vskip-.5em
+%  \begin{figure}
+%    \centering
+%    \includegraphics[width=5.8cm]{cumtxingkai.pdf}\\
+%  \end{figure}
+  \zihao{1}\huawenxingkai\cumt@biyexuexiao\par\vskip-.5em
   \begingroup\zihao{1}\lishu\cumt@xuewei\cumt@xueweilunwen@name\endgroup\par\vskip1.5cm
+%  \begingroup\zihao{1}\cumt@xuewei\cumt@xueweilunwen@name\endgroup\par\vskip1.5cm  
   \begingroup
     \parbox[t]{\cumt@clunwentimu@width\textwidth}{\zihao{2}\bf\boldmath\centering\cumt@clunwentimu}\par
     \bigskip\bigskip
     \parbox[t]{\cumt@elunwentimu@width\textwidth}{\zihao{2}\centering\cumt@elunwentimu}\par
   \endgroup
   \vfill\heiti
-  \begin{tabu}to\linewidth{X[-1,r]X[-1,l]}
-    \begin{tabu}spread 0mm{X[1,r]X[-1,l]X[-1,l]}
-      \makebox[4em][s]{\cumt@zuozhe@name} & \multicolumn{2}{c}{\cumt@zuozhe}\\
-      \tabucline{2-}
-      \cumt@shenqingxuewei@name &
-      \multicolumn{2}{c}{\cumt@xueweileibie\cumt@xuewei}\rule{\z@}{.8cm}\\
-      \tabucline{2-}
-      \cumt@xuekezhuanye@name &
-        \multicolumn{2}{c}{\makebox[7em][c]{\cumt@xuekezhuanye}}\rule{\z@}{.8cm}\\
-      \tabucline{2-}
-      \multicolumn{2}{l}{\cumt@dabianweiyuanhuizhuxi@name} &
-        \makebox[4em][c]{\cumt@dabianweiyuanhuizhuxi}\rule{\z@}{.8cm}\\
-      \tabucline{3-}
-      \tabuphantomline
-    \end{tabu}
-    &
-    \begin{tabu}spread 0mm{X[r]X[c]}
-      \makebox[4em][s]{\cumt@daoshi@name} & \cumt@daoshi
-      \@ifundefined{cumt@dierdaoshi}{}{\@sep\cumt@dierdaoshi}\\
-      \tabucline{2-}
-      \cumt@peiyangdanwei@name & \cumt@peiyangdanwei\rule{\z@}{.8cm}\\
-      \tabucline{2-}
-      \cumt@yanjiufangxiang@name & \makebox[7em][c]{\cumt@yanjiufangxiang}\rule{\z@}{.8cm}\\
-      \tabucline{2-}
-      \makebox[4em][s]{\cumt@pingyueren@name} & \cumt@pingyueren\rule{\z@}{.8cm}\\
-      \tabucline{2-}
-    \end{tabu}\\
-  \end{tabu}\par
+  
+%  \begin{tabu}to\linewidth{X[-1,r]X[-1,l]}
+%    \begin{tabu}spread 0mm{X[1,r]X[-1,l]X[-1,l]}
+%      \makebox[4em][s]{\cumt@zuozhe@name} & \multicolumn{2}{c}{\cumt@zuozhe}\\
+%      \tabucline{2-}
+%      \cumt@shenqingxuewei@name &
+%      \multicolumn{2}{c}{\cumt@xueweileibie\cumt@xuewei}\rule{\z@}{.8cm}\\
+%      \tabucline{2-}
+%      \cumt@xuekezhuanye@name &
+%        %\multicolumn{2}{c}{\makebox[7em][c]{\zihao 5 \cumt@xuekezhuanye}}\rule{\z@}{.8cm}\\
+%        \multicolumn{2}{c}{\makebox[7em][c]{大地测量学}}\rule{\z@}{.8cm}\\        
+%      \tabucline{2-}
+%      &  \multicolumn{2}{c}{\makebox[7em][c]{与测量工程}}\rule{\z@}{.8cm}\\ 
+%      \tabucline{2-}
+%      \multicolumn{2}{l}{\cumt@dabianweiyuanhuizhuxi@name} &
+%        \makebox[4em][c]{\cumt@dabianweiyuanhuizhuxi}\rule{\z@}{.8cm}\\
+%      \tabucline{3-}
+%      \tabuphantomline
+%    \end{tabu}
+%    &
+%    \begin{tabu}spread 0mm{X[r]X[c]}
+%      \makebox[4em][s]{\cumt@daoshi@name} & \cumt@daoshi
+%      \@ifundefined{cumt@dierdaoshi}{}{\@sep\cumt@dierdaoshi}\\
+%      \tabucline{2-}
+%      \cumt@peiyangdanwei@name & \cumt@peiyangdanwei\rule{\z@}{.8cm}\\
+%      \tabucline{2-}
+%      \cumt@yanjiufangxiang@name & \makebox[7em][c]{3S技术集成}\rule{\z@}{.8cm}\\
+%      \tabucline{2-}
+%       & \makebox[7em][c]{及其应用}\rule{\z@}{.8cm} \\
+%      \tabucline{2-}
+%      \makebox[4em][s]{\cumt@pingyueren@name} & \cumt@pingyueren\rule{\z@}{.8cm}\\
+%      \tabucline{2-}
+%    \end{tabu}\\
+%  \end{tabu}\par
+            \Large 姓名\ \ \underline{\makebox[108pt]{\cumt@zuozhe}}\ \ 学号\ \ \underline{\makebox[108pt]{\cumt@xuehao}}\\
+	\Large 导师\ \ \underline{\makebox[108pt]{\cumt@daoshi}}\ \ 职称\ \ \underline{\makebox[108pt]{\cumt@daoshizhicheng}}\\
+	\Large 学院\ \ \underline{\makebox[108pt]{\cumt@peiyangdanwei}}\ \ 专业\ \ \underline{\makebox[108pt]{\cumt@xuekezhuanye}}\\
   \vfill
   \cumtyear \cumt@biyeshijiannian@name \cumt@month \cumt@biyeshijianyue@name
   \vskip.2cm\null
@@ -368,6 +403,7 @@
   \make@title@cover{\cumt@acknowledgements@title}
   \pagestyle{cumt@empty}\zihao{-4}\kaishu\parindent2em}
 \def\endacknowledgements{\clearpage}
+%abstract in chinese
 \def\cabstract{%
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \chapter*{\abstractname}
@@ -381,12 +417,14 @@
     \bgroup\bfseries\songti\cumt@ckeywords@name:\space\egroup
     ##1}}
   \def\endcabstract{\clearpage}
+% abstract in english
 \def\eabstract{
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \phantomsection
   \addcontentsline{toe}{chapter}{Abstract}
   \parindent\z@
-  \parbox[t]{\textwidth}{\bfseries\sffamily\zihao{-2}\centering Abstract}\par\vskip1.7em
+  %\parbox[t]{\textwidth}{\bfseries\sffamily\zihao{-2}\centering Abstract}\par\vskip1.7em
+  \parbox[t]{\textwidth}{\bfseries\zihao{-2}\centering Abstract}\par\vskip1.7em  
   \@mkboth{Abstract}{Abstract}
   \zihao{-4}\parindent2em
   \def\EKeyWords##1{\par\bigskip\parindent\z@
@@ -415,18 +453,22 @@
 \else
   \relax
 \fi
+% content in chinese
 \renewcommand\tableofcontents{
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \chapter*{\contentsname}\vskip-10\p@
   \@mkboth{\contentsname}{\contentsname}\normalsize
+  \zihao{-4}
   \@starttoc{toc}}
 \def\econtentsname{Contents}
+% content in english 
 \newcommand\tableofecontents{
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \phantomsection
   \addcontentsline{toe}{chapter}{\econtentsname}
   \parindent\z@
-  \parbox[t]{\textwidth}{\bfseries\sffamily\zihao{-2}\centering\econtentsname}
+  %\parbox[t]{\textwidth}{\bfseries\sffamily\zihao{-2}\centering\econtentsname}
+  \parbox[t]{\textwidth}{\bfseries\zihao{-2}\centering\econtentsname}
   \par\vskip8\p@\parindent2em
   \@mkboth{\econtentsname}{\econtentsname}
   \@starttoc{toe}}
@@ -453,6 +495,7 @@
       \par%
     \egroup
   \fi}
+  % chapter title format
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
@@ -465,6 +508,7 @@
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       {\bf\songti\boldmath #1}
+      %{\bf\heiti\boldmath #1}
       \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{\bf.}\mkern \@dotsep mu$}\hfill
       \nobreak
       \hb@xt@\@pnumwidth{\hfil\normalfont\normalcolor\bf #2}\par
@@ -536,8 +580,10 @@
   \makebox[\dimexpr3cm-.8pt\relax][c]{\zihao{5}#3}\vrule
   \hrule
   \hskip-.4pt \hrule\nobreak}
+% the figure
 \renewcommand\thefigure{\ifnum \c@chapter>\z@ \thechapter--\fi \@arabic\c@figure}
 \def\fps@figure{htbp}
+%\def\fps@figure{h}
 \def\ftype@figure{1}
 \def\ext@figure{lof}
 \def\fnum@figure{\figurename\nobreakspace\thefigure}
@@ -545,8 +591,10 @@
 \renewenvironment{figure}
   {\@float{figure}\zihao{5}\addtocounter{cumt@totalfigures}{1}}
   {\end@float}
+% the table
 \renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter--\fi \@arabic\c@table}
 \def\fps@table{htbp}
+%\def\fps@table{h}
 \def\ftype@table{2}
 \def\ext@table{lot}
 \def\fnum@table{\tablename\nobreakspace\thetable}
@@ -594,6 +642,7 @@
     \hb@xt@\hsize{\hfil\box\@tempboxb\hfil}
   \fi
   \vskip\belowcaptionskip}
+% the notation
 \newenvironment{notation}[1][2.5cm]{
   \ifcumt@final\cleardoublepage\else\clearpage\fi
   \chapter*{\cumt@notation@name}
@@ -720,7 +769,7 @@
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                             {.5em \@plus .2ex \@minus .2ex}%
                             {.5em \@plus .4ex}%
-                            {\zihao{4}\songti}}
+                            {\zihao{4}}}
 \setlength  \leftmargini{3.8em}
 \setlength  \labelsep   {2ex}
 \setlength  \labelwidth {\leftmargini}
@@ -745,7 +794,8 @@
    \let\makelabel\descriptionlabel}}
   {\endlist}
 \ifcumt@authoryear
-  \xdef\cumt@biboptions{square,numbers,sort}
+  \xdef\cumt@biboptions{square,super,sort}
+  %\xdef\cumt@biboptions{square,numbers,sort}
   \AtEndOfClass{
   \def\cumt@authoryear@format{
     \advance\leftmargin\bibindent
@@ -754,11 +804,13 @@
     \parsep5\p@}}
 \else
   \ifcumt@numbers
-    \xdef\cumt@biboptions{square,numbers,sort&compress}
+    %\xdef\cumt@biboptions{square,numbers,sort&compress}
+    \xdef\cumt@biboptions{square,super,sort&compress}
     \let\cumt@authoryear@format\@empty
   \fi
 \fi
-\@ifundefined{cumt@biboptions}{\xdef\cumt@biboptions{square,numbers,sort}}{}
+%\@ifundefined{cumt@biboptions}{\xdef\cumt@biboptions{square,numbers,sort}}{}
+\@ifundefined{cumt@biboptions}{\xdef\cumt@biboptions{square,super,sort}}{}
 \InputIfFileExists{\jobname.spl}{}{}
 \RequirePackage[\cumt@biboptions]{natbib}
 \newwrite\splwrite
@@ -825,7 +877,7 @@
   \chapter*{\cumt@declaration@title}\vskip-6\p@%
   \phantomsection
   \addcontentsline{toe}{chapter}{Declaration of \cumt@thesis{} Originality}
-  {\kaishu\parindent2em\cumt@declaration@neirong}
+  {\zihao{-4}\kaishu\parindent2em\cumt@declaration@neirong}
   \par\vskip40\p@
   \hb@xt@\textwidth{\songti\hfill\cumt@xueweilunwenzuozheqianming@name\hskip4em}
   \hb@xt@\textwidth{\songti\hfill\cumt@qianmingriqi}
@@ -834,7 +886,7 @@
   \tolerance=10000
   \hbadness=10000
   \vbadness=10000
-  \cumt@declaration
+%  \cumt@declaration
   \cumt@datacollection}
 \def\GuanJianCi#1{\def\cumt@guanjianci{#1}}
     \let\cumt@guanjianci\@empty
@@ -886,122 +938,122 @@
   \centering\parindent\z@\zihao{5}
   \setlength{\tabcolsep}{\z@}
 \tabulinesep=0mm
-\begin{tabu}to\linewidth{|X[c,m]|}
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[-2,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}%[2pt,white][1.5pt,white]
-    \rowfont\bf
-    \cumt@ckeywords@name* & \cumt@miji@name* & \cumt@zhongtufenleihao@name*
-    & UDC & \cumt@lunwenzizhu@name\\
-    \hline
-    \cumt@guanjianci & \cumt@miji & \cumt@zhongtufenleihao & \cumt@udc
-    & \cumt@lunwenzizhu\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    \rowfont\bf
-    \cumt@xueweishouyudanweimingcheng@name* & \cumt@xueweishouyudanweidaima@name*
-    & \cumt@xueweileibie@name* & \cumt@xueweijibie@name*\\
-    \hline
-    \cumt@xueweishouyudanweimingcheng & \cumt@xueweishouyudanweidaima
-    & \cumt@xueweileibie & \cumt@xueweijibie\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[2,c,m]|X[2,c,m]|X[1,c,m]}%|[2pt,white]|[1.5pt,white]
-    \rowfont\bf
-    \cumt@lunwentiming@name* & \cumt@binglietiming@name*
-    & \cumt@lunwenyuzhong@name*\\
-    \hline
-    \cumt@lunwentiming & \cumt@binglietiming & \cumt@lunwenyuzhong\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
-     {\bf\cumt@zuozhexingming@name*} & \cumt@zuozhe & {\bf\cumt@xuehao@name*}
-     & \cumt@xuehao\\
-     \hline
-     \rowfont\bf
-     \cumt@peiyangdanweimingcheng@name* & \cumt@peiyangdanweidaima@name*
-     & \cumt@peiyangdanweidizhi@name & \cumt@youbian@name\\
-     \hline
-     \cumt@peiyangdanweimingcheng & \cumt@peiyangdanweidaima
-     & \cumt@peiyangdanweidizhi & \cumt@youbian\\
-     \hline
-     \rowfont\bf
-     \cumt@xuekezhuanye@name* & \cumt@yanjiufangxiang@name* & \cumt@xuezhi@name*
-     & \cumt@xueweishouyunian@name*\\
-     \hline
-     \cumt@xuekezhuanye & \cumt@yanjiufangxiang & \cumt@xuezhi
-     & \cumt@xueweishouyunian{} \cumt@biyeshijiannian@name\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[2,c,m]}
-    {\bf\cumt@lunwentijiaoriqi@name*} & \cumt@lunwentijiaoriqi\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    {\bf\cumt@daoshixingming@name*} & \cumt@daoshi & {\bf\cumt@zhicheng@name*}
-    & \cumt@daoshizhicheng\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    \rowfont\bf
-    \cumt@pingyueren@name & \cumt@dabianweiyuanhuizhuxi@name*
-    & \cumt@dabianweiyuanhuichengyuan@name* \\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    \cumt@pingyueren & \cumt@dabianweiyuanhuizhuxi
-    & \cumt@dabianweiyuanhuichengyuan\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=2mm
-  \begin{tabu}to\linewidth{X[-1,m]X[l,m]}%|[2pt,white]|[2pt,white]|[2pt,white]
-    ~{\bf\cumt@dianzibanlunwentijiaogeshi@name}~ &
-    ~\bf\songti \cumt@wenben@name~(~\checkmark~)
-    ~\cumt@tuxiang@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
-    ~\cumt@shipin@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
-    ~\cumt@yinpin@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
-    ~\cumt@duomeiti@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
-    ~\cumt@qita@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)\\
-  \end{tabu}\\
-  \tabulinesep=2mm
-  \begin{tabu}to\linewidth{X[l,m]}%|[2pt,white]
-    \rowfont\bf
-    ~\cumt@tuijiangeshi@name: application msword; application pdf\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    \rowfont\bf
-    \cumt@dianzibanlunwenchubanzhe@name & \cumt@dianzibanlunwenchubandi@name
-    & \cumt@quanxianshengming@name\\
-  \end{tabu}\\
-  \hline
-  \extrarowsep=2mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
-    \cumt@dianzilunwenchubanzhe & \cumt@dianzilunwenchubandi
-    & \cumt@quanxianshengming \\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[1,c,m]|X[2,c,m]}
-    {\bf\cumt@lunwenzongyeshu@name*} & \pageref{totalpage}\\
-  \end{tabu}\\
-  \hline
-  \tabulinesep=3mm
-  \begin{tabu}to\linewidth{X[l,m]}%|[2pt,white]
-    \rowfont\bf
-    ~\cumt@beizhu@name.\\
-  \end{tabu}\\
-  \hline
-\end{tabu}
+%\begin{tabu}to\linewidth{|X[c,m]|}
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[-2,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}%[2pt,white][1.5pt,white]
+%    \rowfont\bf
+%    \cumt@ckeywords@name* & \cumt@miji@name* & \cumt@zhongtufenleihao@name*
+%    & UDC & \cumt@lunwenzizhu@name\\
+%    \hline
+%    \cumt@guanjianci & \cumt@miji & \cumt@zhongtufenleihao & \cumt@udc
+%    & \cumt@lunwenzizhu\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    \rowfont\bf
+%    \cumt@xueweishouyudanweimingcheng@name* & \cumt@xueweishouyudanweidaima@name*
+%    & \cumt@xueweileibie@name* & \cumt@xueweijibie@name*\\
+%    \hline
+%    \cumt@xueweishouyudanweimingcheng & \cumt@xueweishouyudanweidaima
+%    & \cumt@xueweileibie & \cumt@xueweijibie\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[2,c,m]|X[2,c,m]|X[1,c,m]}%|[2pt,white]|[1.5pt,white]
+%    \rowfont\bf
+%    \cumt@lunwentiming@name* & \cumt@binglietiming@name*
+%    & \cumt@lunwenyuzhong@name*\\
+%    \hline
+%    \cumt@lunwentiming & \cumt@binglietiming & \cumt@lunwenyuzhong\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%     {\bf\cumt@zuozhexingming@name*} & \cumt@zuozhe & {\bf\cumt@xuehao@name*}
+%     & \cumt@xuehao\\
+%     \hline
+%     \rowfont\bf
+%     \cumt@peiyangdanweimingcheng@name* & \cumt@peiyangdanweidaima@name*
+%     & \cumt@peiyangdanweidizhi@name & \cumt@youbian@name\\
+%     \hline
+%     \cumt@peiyangdanweimingcheng & \cumt@peiyangdanweidaima
+%     & \cumt@peiyangdanweidizhi & \cumt@youbian\\
+%     \hline
+%     \rowfont\bf
+%     \cumt@xuekezhuanye@name* & \cumt@yanjiufangxiang@name* & \cumt@xuezhi@name*
+%     & \cumt@xueweishouyunian@name*\\
+%     \hline
+%     \cumt@xuekezhuanye & \cumt@yanjiufangxiang & \cumt@xuezhi
+%     & \cumt@xueweishouyunian{} \cumt@biyeshijiannian@name\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[2,c,m]}
+%    {\bf\cumt@lunwentijiaoriqi@name*} & \cumt@lunwentijiaoriqi\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    {\bf\cumt@daoshixingming@name*} & \cumt@daoshi & {\bf\cumt@zhicheng@name*}
+%    & \cumt@daoshizhicheng\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    \rowfont\bf
+%    \cumt@pingyueren@name & \cumt@dabianweiyuanhuizhuxi@name*
+%    & \cumt@dabianweiyuanhuichengyuan@name* \\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    \cumt@pingyueren & \cumt@dabianweiyuanhuizhuxi
+%    & \cumt@dabianweiyuanhuichengyuan\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=2mm
+%  \begin{tabu}to\linewidth{X[-1,m]X[l,m]}%|[2pt,white]|[2pt,white]|[2pt,white]
+%    ~{\bf\cumt@dianzibanlunwentijiaogeshi@name}~ &
+%    ~\bf\songti \cumt@wenben@name~(~\checkmark~)
+%    ~\cumt@tuxiang@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
+%    ~\cumt@shipin@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
+%    ~\cumt@yinpin@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
+%    ~\cumt@duomeiti@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)
+%    ~\cumt@qita@name~(~\textcolor[rgb]{1.00,1.00,1.00}{\checkmark}~)\\
+%  \end{tabu}\\
+%  \tabulinesep=2mm
+%  \begin{tabu}to\linewidth{X[l,m]}%|[2pt,white]
+%    \rowfont\bf
+%    ~\cumt@tuijiangeshi@name: application msword; application pdf\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    \rowfont\bf
+%    \cumt@dianzibanlunwenchubanzhe@name & \cumt@dianzibanlunwenchubandi@name
+%    & \cumt@quanxianshengming@name\\
+%  \end{tabu}\\
+%  \hline
+%  \extrarowsep=2mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[1,c,m]|X[1,c,m]}
+%    \cumt@dianzilunwenchubanzhe & \cumt@dianzilunwenchubandi
+%    & \cumt@quanxianshengming \\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[1,c,m]|X[2,c,m]}
+%    {\bf\cumt@lunwenzongyeshu@name*} & \pageref{totalpage}\\
+%  \end{tabu}\\
+%  \hline
+%  \tabulinesep=3mm
+%  \begin{tabu}to\linewidth{X[l,m]}%|[2pt,white]
+%    \rowfont\bf
+%    ~\cumt@beizhu@name.\\
+%  \end{tabu}\\
+%  \hline
+%\end{tabu}
 \egroup}
 \newtheoremstyle{cumt}                % <name>
      {10\p@ \@minus 4\p@ \@plus 2\p@} % <Space above>

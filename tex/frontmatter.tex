@@ -1,0 +1,108 @@
+%--------致谢
+\begin{acknowledgements}
+	矿大七年的求学经历即将结束，纵有千万般不舍，也要走向社会，用自己的在矿大学到的知识回报这个社会。作为矿大
+	新百年的学子，矿大「好学力行、求是创新、艰苦奋斗、自强不息」的校训将成为我人生中的座右铭，在接下来
+	的人生中，矿大精神将永远激励我前进，在这再次感谢矿大对我培养。
+	
+	首先感谢我的导师高井祥老师和孙久运老师，您们是我研究生生涯中的指明灯，指引我走向学术生涯道路。两位老师孜孜不倦的精神使
+	我受益终身，你们为我提供了优越的科研环境，耐心和用心地指导我们开展学术活动，严谨的科研思维
+	和扎实的工作作风是我的楷模。当我申请去中科院电子所苏州研究院实习，你们坚定的支持是我最大的动力，再次感谢你们。
+	
+	感谢论文中所有参考文献的作者，是你们杰出的工作，让我产生一点点灵感，你们是巨人的肩膀。还要感谢\LaTeX
+	中文社区的肖立顺师兄，你无偿提供的矿大毕业论文\LaTeX{}模板，使我能够使用优美的\LaTeX{}完成论文排版工作。
+	
+	也要感谢远在家乡的家人，是你们坚定不移的支持，是我读研的全部动力，这份理解和付出无法报答，希望你们身体健康，永远
+	幸福。
+	
+	最后，感谢各位专家和老师，在百忙之中评阅本论文并提出宝贵的意见和建议，我会聆听你们的教导继续努力。
+\end{acknowledgements}
+
+%--------中文摘要
+\begin{cabstract}
+	% 信息是当代社会重要的决策资源，随着移动互联网的迅速发展，以新浪微博为代表的
+	% 社交空间数据呈现爆炸式增长，然而这些数据存在异构性、不规则性和海量性等
+	% 特点，使得空间数据分析、空间数据挖掘和信息提取愈发难以处理。
+	% 随着移动互联网的迅速发展，以新浪微博为代表的社交网络数据呈现爆炸式增长，其中
+	% 包含的空间数据更值得关注和研究。然而这些数据存在着异质性、不规则性和海量性等
+	% 特点，使得空间数据查询、空间数据挖掘和空间知识提取愈发难以处理。
+	
+	数字城市是智慧城市重要的组成部分，也同时面临着海量空间数据获取、管理、分析和挖掘等挑战。
+	移动互联网的发展使得网络空间数据呈现爆炸式增长，其中蕴含的信息对智慧城市建设有着重要的
+	参考建议，然而这些数据存在着异质性、不规则性和海量性等特点，使得空间数据查询、空间数据挖掘和
+	空间知识提取愈发难以处理。
+	
+	传统的空间分析工具面对上述需求往往捉襟见肘，本文对当前流行的并行计算框架Spark进行空间扩展，
+	构建Spatial-Spark并行空间计算框架。以此为基础，对海量新浪微博POI进行同位模式
+	挖掘，对全国新浪微博用户空间位置进行人口网络图分析，本文所作的工作和结论如下：
+	
+	(1)对Spark RDD((Resilient Distributed Datasets)进行空间维度上扩展，对点、线和面构建了相应的Spatial RDD，
+	支持海量空间数据读写、空间坐标转换和分区空间数据索引。提供空间拓扑查询、空间K邻居查询和空间连接查询三个常用的
+	空间查询模块，通过搭建Hadoop/Spark计算集群，验证了Spatial-Spark在处理海量空间数据方面的优势。
+	
+	(2)使用新浪微博API获取全国范围内微博POI数据，对其进行同位模式挖掘。首先分析同位模式
+	挖掘算法的关键，使用Spatial-Spark对全连接算法进行并行化设计。对上海、武汉和重庆三市二阶模式
+	进行比较，不同城市呈现不同模式；选择距离阈值$d=500\text{\textrm{m}}$和空间参与度阈值$0.6$，
+	对北京市微博POI类别进行同位模式挖掘，结果显示阶数越高越呈现商业聚集模式，
+	其中最高六阶模式为(KTV，中餐厅，咖啡厅，甜品店，美容美发店，酒吧)。
+	
+	(3)根据全国新浪微博用户在$2016$年春节期间的空间位置数据，使用Spatial-Spark构建全国城市之间人口流动网络图。
+	首先计算每个城市人口流入量、流出量和流入流出比，发现全国城市在春节期间人口流动呈现多样性；然后采用PageRank算法
+	计算城市在人口流动网络图中的权重，发现城市权重与城市GDP发展的存在相关性，并根据权重将中心城市划分四个层次；
+	最后对社群挖掘算法进行并行化改进，对人口流动网络图进行社群挖掘，发现城市联系紧密性与省份有关，地理位置对其
+	影响很大，但也存在突破地理空间位置限制的城市。
+	
+	本文包含图\ref{totalfigure}幅，表\ref{totaltable}张，参考文献\ref{totalbib}篇。
+	%--------中文关键词
+	\CKeyWords{Spatial-Spark, 新浪微博, 同位模式, 网络分析}
+\end{cabstract}
+
+%--------英文摘要
+\begin{eabstract}
+	% Information plays a signifcant role for strategy making in moderen society. As the tremendous 
+	% increment of internet, the social spatial data implying folk's behavior has been explosing. 
+	% Howerver, the heterogeneous, irregular and countless data causes the spatial data's analysis,
+	% mining and knowledge discovering becoming more difficult to handle.
+	% As the tremendous development of mobile internet, the social networks, represented by Weibo, are 
+	% releasing explosing amount of data. The spatial data in that is deserved of particular attention and 
+	% reserarch. Howerver, the heterogeneous, irregular and countless data leads the spatial data's analysis,
+	% mining and knowledge discovering becoming more intractable.
+	Digit City plays a vital role in smart city, and facing explosing amount data fetch, management, analysis
+	and mining challenges. Mobing internet developments cause the cyber spatial data increaing unbelievablely which
+	contains much informations for building the smart cities. Howerver, the heterogeneous, irregular and countless data leads the spatial data's analysis,
+	mining and knowledge discovering becoming more intractable.
+	
+	Traditional spatial analysis method cannot meet the above requires, so this thesis builds the parallel 
+	spatial computing framwork, called Spatail-Spark, based on popular open-source parallel computing framwork.
+	Using this framework, it mines the spatial co-location pattern in Weibo's POIs and population graph according to 
+	the Weibo users's spatial locations. The achievements and conclusions of this thesis are listed as follows:
+	
+	(1) It expands the Spark RDD in spatial geometries called Spatial RDD, including point, line and polygon. 
+	And those RDDs support the spaital data reading and writing, spatial coordinates converting and spatial 
+	index building in separate partition. It also provides three spatial query modules: sptaial topology query,
+	spatial K near neighbour query and spatial join query. At last, it designs experiments to figure out the 
+	efficiency of Spatial-Spark by various comparsions.
+	
+	(2) After fetching out Weibo's POIs through Weibo's API, it conducts the spatial co-location pattern mining
+	algorithm in those data. It analysis the vital key of spatial co-location pattern and redesigns the parallel 
+	% algorithm for efficient perform using Sptial-Spark. It comes out that the patterns shows more commercial 
+	% characteristics when the pattern's order is bigger on the condition that 
+	% the spaital distance threshold is $500$ meters and the participating index threshold is $0.6$. Moreover, the 
+	% six order pattern is (KTV, Chinese Restaurant, Coffe Bar, Dessert Stall, Barber Shop, Bar Pub).
+	algorithm for efficient performance using Spatial-Spark. It comes out that the there are huge differences 
+	among the different cities, taking the Shanghai, Wuhan and Chongqing. It also provides that the patterns shows more commercial 
+	characteristics when the pattern's order is bigger on the condition that 
+	the spaital distance threshold is $500$ meters and the participating index threshold is $0.6$. Moreover, the 
+	six order pattern is (KTV, Chinese Restaurant, Coffe Bar, Dessert Stall, Barber Shop, Bar Pub).
+	
+	(3) It constructs the cities floating population graph using Spatial-Spark from the national Weibo's users 
+	location in 2016 Chinese New Year holiday. At first, it calculates the popluation amount of flow-in and flow-out,
+	and flow ratio, which displays the diversity of floating population among the national cities. Then it figures
+	out the national cities' weights in floating population network under PageRank algorithm. It finds out the relationship
+	between city's weight and city's development and divides the natianal cities into four levels. Lastly, it applys the 
+	parallel community mining algorithm in this network and uncovers the phenomenon that the cities's popluaiton relationships are 
+	almost limited by the provinces and there are also some exceptional cases. 
+	
+	This thesis contains \ref{totalfigure} figures, \ref{totaltable} tables and \ref{totalbib} references。
+	%--------英文关键词
+	\EKeyWords{Spatial-Spark, Weibo, Co-Location Pattern, Graph Analysis}
+\end{eabstract}

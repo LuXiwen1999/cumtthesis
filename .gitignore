@@ -1,0 +1,11 @@
+#屏蔽Latex模板可能生成的一些内容
+*.aux
+*.bbl
+*.blg
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.toe
+*.gz
